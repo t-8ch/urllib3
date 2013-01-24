@@ -31,13 +31,6 @@ class TestHTTPS(HTTPSDummyServerTestCase):
                                fields={'method': 'GET'})
         self.assertEqual(r.status, 200, r.data)
 
-    def test_set_ssl_version_to_sslv2(self):
-        # Note: Test fails on Py32 with OpenSSL <1.0.
-        self._pool.ssl_version = ssl.PROTOCOL_SSLv2
-        self.assertRaises(SSLError,
-                          self._pool.request, 'GET', '/specific_method',
-                          fields={'method': 'GET'})
-
     def test_verified(self):
         https_pool = HTTPSConnectionPool(self.host, self.port,
                                          cert_reqs='CERT_REQUIRED')
