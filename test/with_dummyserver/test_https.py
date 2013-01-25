@@ -126,9 +126,12 @@ class TestHTTPS(HTTPSDummyServerTestCase):
         self.assertRaises(SSLError, https_pool.request, 'GET', '/')
 
 
-class TestHTTPS_TLSv1(TestHTTPS):
+class TestHTTPS_TLSv1(HTTPSDummyServerTestCase):
     certs = DEFAULT_CERTS.copy()
     certs['ssl_version'] = ssl.PROTOCOL_TLSv1
+
+    def setUp(self):
+        self._pool = HTTPSConnectionPool(self.host, self.port)
 
     def test_set_ssl_version_to_sslv3(self):
         self._pool.ssl_version = ssl.PROTOCOL_SSLv3
