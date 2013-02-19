@@ -3,6 +3,7 @@
 *.egg
 *.egg-info
 *.log
+*$py.class
 /dist
 /build
 /docs/_build

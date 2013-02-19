@@ -28,6 +28,7 @@ try: # Compiled with SSL?
     HTTPSConnection = object
     BaseSSLError = None
     ssl = None
+    CERT_NONE = None
 
     try: # Python 3
         from http.client import HTTPSConnection
@@ -35,6 +36,8 @@ try: # Compiled with SSL?
         from httplib import HTTPSConnection
 
     import ssl
+
+    CERT_NONE = ssl.CERT_NONE
     BaseSSLError = ssl.SSLError
 
 except (ImportError, AttributeError): # Platform-specific: No SSL.
@@ -103,7 +106,7 @@ class VerifiedHTTPSConnection(HTTPSConnection):
                                     server_hostname=self.host,
                                     ssl_version=resolved_ssl_version)
 
-        if resolved_cert_reqs != ssl.CERT_NONE:
+        if resolved_cert_reqs != CERT_NONE:
             match_hostname(self.sock.getpeercert(), self.host)
 
 
