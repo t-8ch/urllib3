@@ -92,25 +92,29 @@ class VerifiedHTTPSConnection(HTTPSConnection):
         # Add certificate verification
         sock = socket.create_connection((self.host, self.port), self.timeout)
 
-        resolved_cert_reqs = resolve_cert_reqs(self.cert_reqs)
-        resolved_ssl_version = resolve_ssl_version(self.ssl_version)
+        try:
+            resolved_cert_reqs = resolve_cert_reqs(self.cert_reqs)
+            resolved_ssl_version = resolve_ssl_version(self.ssl_version)
 
-        if self._tunnel_host:
-            self.sock = sock
-            # Calls self._set_hostport(), so self.host is
-            # self._tunnel_host below.
-            self._tunnel()
+            if self._tunnel_host:
+                self.sock = sock
+                # Calls self._set_hostport(), so self.host is
+                # self._tunnel_host below.
+                self._tunnel()
 
-        # Wrap socket using verification with the root certs in
-        # trusted_root_certs
-        self.sock = ssl_wrap_socket(sock, self.key_file, self.cert_file,
-                                    cert_reqs=resolved_cert_reqs,
-                                    ca_certs=self.ca_certs,
-                                    server_hostname=self.host,
-                                    ssl_version=resolved_ssl_version)
+            # Wrap socket using verification with the root certs in
+            # trusted_root_certs
+            self.sock = ssl_wrap_socket(sock, self.key_file, self.cert_file,
+                                        cert_reqs=resolved_cert_reqs,
+                                        ca_certs=self.ca_certs,
+                                        server_hostname=self.host,
+                                        ssl_version=resolved_ssl_version)
 
-        if resolved_cert_reqs != ssl.CERT_NONE:
-            match_hostname(self.sock.getpeercert(), self.host)
+            if resolved_cert_reqs != ssl.CERT_NONE:
+                match_hostname(self.sock.getpeercert(), self.host)
+        except BaseSSLError as e:
+            # SSL certificate error
+            raise SSLError(e)
 
 
 ## Pool objects
