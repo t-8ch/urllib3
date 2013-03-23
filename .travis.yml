@@ -3,7 +3,7 @@ python:
   - pypy
 script: nosetests
 before_install:
-  - 'echo "deb http://ppa.launchpad.net/pypy/ppa/ubuntu precise main" >> /etc/apt/sources.list'
+  - 'echo "deb http://ppa.launchpad.net/pypy/ppa/ubuntu precise main" | sudo tee /etc/apt/sources.list'
 install:
   - sudo apt-get install -qq pypy
   - pip install -r test-requirements.txt --upgrade
