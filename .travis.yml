@@ -5,8 +5,9 @@ script: nosetests
 before_install:
   - 'echo "deb http://ppa.launchpad.net/pypy/ppa/ubuntu precise main" | sudo tee /etc/apt/sources.list'
 install:
+  - sudo apt-get update
+  - sudo apt-get remove -qq pypy pypy-libs
   - sudo apt-get install -qq pypy
   - pip install -r test-requirements.txt --upgrade
-  - sudo apt-get remove -qq pypy pypy-libs
 notifications:
   email: false
