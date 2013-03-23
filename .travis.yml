@@ -9,5 +9,7 @@ install:
   - sudo apt-get remove -qq pypy pypy-lib --force-yes
   - sudo apt-get install -qq pypy --force-yes
   - pip install -r test-requirements.txt --upgrade
+  - python --version
+  - nosetests --version
 notifications:
   email: false
