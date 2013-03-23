@@ -1,7 +1,7 @@
 language: python
 python:
   - pypy
-script: nosetests
+script: "pypy $(which nosetests)"
 before_install:
   - 'echo "deb http://ppa.launchpad.net/pypy/ppa/ubuntu precise main" | sudo tee /etc/apt/sources.list'
 install:
@@ -9,7 +9,8 @@ install:
   - sudo apt-get remove -qq pypy pypy-lib --force-yes
   - sudo apt-get install -qq pypy --force-yes
   - pip install -r test-requirements.txt --upgrade
-  - python --version
-  - nosetests --version
+  - "echo $(which pypy)"
+  - pypy --version
+  - "pypy $(which nosetests --version)"
 notifications:
   email: false
