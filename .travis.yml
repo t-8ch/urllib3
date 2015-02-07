@@ -12,4 +12,5 @@ install:
   - make
 notifications:
   email: false
+sudo: false
 env: PYTHONWARNINGS=always::DeprecationWarning
