@@ -4,11 +4,8 @@ from urllib3.packages import six
 if six.PY3:
     raise SkipTest('Testing of PyOpenSSL disabled on PY3')
 
-try:
-    from urllib3.contrib.pyopenssl import (inject_into_urllib3,
-                                           extract_from_urllib3)
-except ImportError as e:
-    raise SkipTest('Could not import PyOpenSSL: %r' % e)
+from urllib3.contrib.pyopenssl import (inject_into_urllib3,
+                                       extract_from_urllib3)
 
 
 from ..with_dummyserver.test_https import TestHTTPS, TestHTTPS_TLSv1
