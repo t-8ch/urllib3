@@ -12,3 +12,6 @@ install:
 notifications:
   email: false
 env: PYTHONWARNINGS=always::DeprecationWarning
+matrix:
+  include:
+    - jdk: openjdk7
