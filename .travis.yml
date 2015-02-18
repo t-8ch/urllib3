@@ -10,8 +10,7 @@ matrix:
   include:
     - jdk: openjdk7
       python: "2.6"  # just use something
-      install:
+      before_install:
         - wget http://search.maven.org/remotecontent?filepath=org/python/jython-standalone/2.7-b4/jython-standalone-2.7-b4.jar -O jython.jar
-        - chmod +x jython.jar
-        - virtualenv -p jython.jar
-        - make
+        - virtualenv -p "$PWD/jython" venv
+        - source venv/bin/activate
