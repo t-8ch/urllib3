@@ -16,5 +16,5 @@ sudo: false
 cache: pip
 env:
   global:
-    - PIP_WHEEL_DIR=$HOME/.pip/wheels
-    - PIP_FIND_LINKS=$HOME/.pip/wheels
+    - PIP_WHEEL_DIR=file://$HOME/.pip/wheels
+    - PIP_FIND_LINKS=file://$HOME/.pip/wheels
