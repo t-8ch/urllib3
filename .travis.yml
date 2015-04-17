@@ -7,9 +7,16 @@ python:
   - "3.4"
   - "pypy"
 script: make test
+before_install:
+  - pip install wheel
 install:
   - make
 notifications:
   email: false
 env: PYTHONWARNINGS=always::DeprecationWarning
 sudo: false
+cache: pip
+env:
+  global:
+    - PIP_WHEEL_DIR=$HOME/.pip/wheels
+    - PIP_FIND_LINKS=$HOME/.pip/wheels
