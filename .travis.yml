@@ -30,6 +30,8 @@ matrix:
       env: TOXENV=py35
     - python: pypy-5.4
       env: TOXENV=pypy
+    - python: pypy3
+      env: TOXENV=pypy3
     - language: generic
       os: osx
       env: TOXENV=py26
